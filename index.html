@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>تقویم تیم نووان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+:root{--text:#010736;--muted:#4a5c8a;--navy:linear-gradient(135deg,#4563ad,#22396F 50%,#0D1C42);--gold:linear-gradient(135deg,#F8E1A0,#D9B04F 55%,#A9812C);--on:#FCF1D0;--hol:#b4545e;--gl1:rgba(255,255,255,.7);--gl2:rgba(255,255,255,.24);--gbd:rgba(255,255,255,.95);--line:rgba(34,57,111,.16);--sh:0 18px 48px rgba(34,57,111,.2);color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;color:var(--text);background:#F3E9C9;font-family:'Yekan Bakh','Yekan Bakh FaNum',Yekan,Vazirmatn,Tahoma,sans-serif;line-height:1.7;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(80vmax 60vmax at 8% 8%,rgba(70,100,170,.32),transparent 60%),radial-gradient(70vmax 55vmax at 95% 100%,rgba(212,170,80,.44),transparent 62%),linear-gradient(160deg,#FDF3D6,#E4E1D3)}
+.orb{position:fixed;z-index:-1;border-radius:50%;pointer-events:none}
+.o1{width:380px;height:380px;top:14vh;right:-80px;background:radial-gradient(circle,rgba(69,99,173,.4),transparent 70%)}
+.o2{width:420px;height:420px;bottom:4vh;left:-110px;background:radial-gradient(circle,rgba(222,178,84,.42),transparent 70%)}
+.wrap{max-width:560px;margin:0 auto;padding:16px 16px 40px}
+.logo{text-align:center;font-size:clamp(1.5rem,5.5vw,2rem);font-weight:800;margin:8px 0 0;background:linear-gradient(90deg,#22396F,#B8923A);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub,.st2{text-align:center;color:var(--muted);margin:0}
+.st2{font-size:.78rem;min-height:1.4em}
+button,.lk{font:inherit;color:var(--text);cursor:pointer;border-radius:14px;padding:8px 14px;transition:transform .15s,box-shadow .15s,background-color .15s;background:linear-gradient(145deg,var(--gl1),var(--gl2));border:1px solid var(--gbd);box-shadow:0 4px 14px rgba(34,57,111,.1);text-decoration:none;display:inline-block}
+button:hover,.lk:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(34,57,111,.2)}
+button:disabled{opacity:.45;cursor:default;transform:none}
+.glass{background:linear-gradient(145deg,var(--gl1),var(--gl2));border:1px solid var(--gbd);box-shadow:var(--sh),inset 0 1px 0 #fff,0 0 0 1px rgba(34,57,111,.07)}
+.modal.glass,.uc.glass{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.ic{width:40px;height:40px;padding:0;display:grid;place-items:center;border-radius:50%}
+.ic svg{width:18px;height:18px;stroke:var(--text);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.users{display:flex;flex-direction:column;gap:22px;margin:clamp(60px,17vh,150px) auto 0;max-width:360px;transition:opacity .2s}
+.users.wait{opacity:.5;pointer-events:none}
+.uc{display:flex;align-items:center;justify-content:center;text-align:center;gap:16px;padding:18px 24px;border-radius:24px;font-size:1.2rem;font-weight:700;animation:up .35s both}
+.uc:nth-child(3){animation-delay:.05s}.uc:nth-child(4){animation-delay:.1s}
+@keyframes up{from{opacity:0;transform:translateY(16px)}}
+.nm{white-space:nowrap}.role{font-size:.78rem;font-weight:400;color:var(--muted)}
+.av{width:56px;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:1.5rem;font-weight:800;color:var(--on);background:var(--navy)}
+.av.sm{width:40px;font-size:1.1rem}
+.hide{display:none!important}
+.bar{display:flex;align-items:center;justify-content:space-between;margin:18px 0 14px}
+.who{display:flex;align-items:center;gap:12px;font-weight:600;font-size:1.1rem}
+.panel{border-radius:28px;padding:18px;margin-bottom:16px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
+.st{text-align:center;padding:8px 4px;border-radius:16px;font-size:.78rem;color:var(--muted);background:linear-gradient(145deg,rgba(255,255,255,.55),rgba(255,255,255,.12));border:1px solid var(--gbd)}
+.st b{display:block;font-size:1.35rem;font-weight:800}
+.st:nth-child(1) b{color:#22396F}.st:nth-child(2) b{color:#4f6fb5}.st:nth-child(3) b{color:#9a7b32}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.nav h2{margin:0;font-size:1.2rem;font-weight:800}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;direction:rtl}
+.wd{text-align:center;color:var(--muted);font-size:.85rem;font-weight:600}
+.wd.r{color:var(--hol)}
+.day{aspect-ratio:1;position:relative;display:flex;align-items:center;justify-content:center;padding:0;border-radius:50%;font-weight:600;font-size:clamp(.85rem,3.2vw,1.05rem);box-shadow:none;background:linear-gradient(145deg,rgba(255,255,255,.45),rgba(255,255,255,.05));border:1px solid rgba(255,255,255,.6)}
+.day:hover{background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(255,255,255,.4));transform:none}
+.day.hol{color:var(--hol)}
+.day.od{box-shadow:inset 0 0 0 2px rgba(192,99,79,.6)}
+.day.up{box-shadow:inset 0 0 0 2px rgba(69,99,173,.4)}
+.day.sel{background:linear-gradient(145deg,rgba(255,255,255,.95),rgba(255,255,255,.45));border-color:var(--muted)}
+.day.today,.day.today.sel{background:var(--navy);color:var(--on);border-color:transparent;font-weight:800}
+.day.shoot,.day.shoot.sel,.day.shoot.today{background:var(--gold);color:#3a2a00;border-color:rgba(255,255,255,.85);font-weight:800;box-shadow:0 4px 12px rgba(184,146,58,.45)}
+.day.shoot.today{box-shadow:0 0 0 2px #22396F,0 4px 12px rgba(184,146,58,.45)}
+.dots{position:absolute;bottom:4px;display:flex;gap:2px}
+.dots i{width:5px;height:5px;border-radius:50%;background:#7a8fc4}
+.dots i.up{background:#3d5aa3}.dots i.od{background:#C0634F}
+.day.today .dots i{background:var(--on)}.day.shoot .dots i{background:#3a2a00}
+.lg{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:12px;font-size:.78rem;color:var(--muted)}
+.lg span{display:flex;align-items:center;gap:6px}
+.lg .s{width:11px;height:11px;border-radius:50%;display:inline-block}
+.lg .od{background:linear-gradient(135deg,#e0907a,#9c3f2e)}.lg .up{background:linear-gradient(135deg,#5b7bc4,#0D1C42)}.lg .dn{background:linear-gradient(135deg,#b9c6e8,#7a8fc4)}.lg .sh{background:var(--gold)}
+.ag{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+.ah{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
+.ah>div:first-child{display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;min-width:0}
+.ah b{font-size:1.05rem;white-space:nowrap;unicode-bidi:isolate}
+.badge{font-size:.72rem;padding:1px 9px;border-radius:99px;background:var(--navy);color:var(--on);font-weight:600;white-space:nowrap}
+.badge.gold{background:var(--gold);color:#3a2a00}
+.hn{color:var(--hol);font-size:.8rem;margin:0;flex-basis:100%;order:3}
+.add,.go{background:var(--navy);color:var(--on);border:0;font-weight:600;border-radius:12px;white-space:nowrap;flex:none}
+.add{padding:6px 14px}
+ul{list-style:none;padding:0;margin:0}
+li{display:flex;align-items:center;gap:10px;padding:8px 2px}
+li .b{width:4px;align-self:stretch;min-height:30px;border-radius:4px;background:linear-gradient(180deg,#5b7bc4,#0D1C42)}
+li .b.f{background:linear-gradient(180deg,#d9b45a,#9a7b32)}
+li .b.od{background:linear-gradient(180deg,#e0907a,#9c3f2e)}
+li .b.dn{background:linear-gradient(180deg,#b9c6e8,#7a8fc4)}
+li span.t{flex:1;word-break:break-word}
+li small{color:var(--muted);font-size:.75rem}
+li.done span.t{text-decoration:line-through;opacity:.5}
+li .lk{padding:2px 10px;font-size:.78rem}
+li button{padding:0 9px;border-radius:10px}
+input[type=checkbox]{-webkit-appearance:none;appearance:none;width:22px;height:22px;flex:none;margin:0;border-radius:50%;background:rgba(255,255,255,.9);border:2px solid #fff;box-shadow:0 0 0 1px rgba(34,57,111,.3);cursor:pointer;transition:.2s}
+input[type=checkbox]:checked{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/13px no-repeat,var(--navy);box-shadow:0 0 0 1px #22396F}
+.note{color:var(--muted);font-size:.85rem;margin:6px 0}
+.t[data-e]{cursor:text}
+input.ed{flex:1;width:100%;min-width:0;font:inherit;color:var(--text);padding:4px 10px;border-radius:10px;border:1px solid #22396F;background:rgba(255,255,255,.7)}
+.wkn{display:flex;align-items:center;justify-content:space-between;margin:4px 0 14px;font-weight:600}
+.wd7{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;direction:rtl}
+.wc{position:relative;display:flex;flex-direction:column;align-items:center;padding:8px 0;border-radius:16px;box-shadow:none;background:linear-gradient(145deg,rgba(255,255,255,.6),rgba(255,255,255,.12))}
+.wc small{color:var(--muted);font-size:.8rem}.wc b{font-size:1.05rem}.wc.fri b{color:var(--hol)}
+.wc.mine{border-color:#22396F;box-shadow:0 0 0 1px #22396F}
+.wc.win{background:var(--gold);border-color:transparent}
+.wc.win b,.wc.win small{color:#3a2a00}
+.wc.lock{cursor:default}
+.pr{position:absolute;top:-7px;inset-inline-start:-3px;width:19px;height:19px;border-radius:50%;background:var(--navy);color:var(--on);font-size:.72rem;font-weight:600;line-height:19px;text-align:center;font-style:normal;box-shadow:0 2px 6px rgba(34,57,111,.3)}
+.cfrow{margin:8px 0}
+.cfb{width:100%;padding:10px;font-weight:700}
+.mr{display:flex;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:.85rem}.mr b{min-width:56px}.mr span{color:var(--muted)}
+.res{margin-top:12px;padding:10px 12px;border-radius:16px;background:rgba(255,255,255,.45);border:1px solid var(--gbd);font-size:.9rem}
+.res small{color:var(--muted)}
+.ov{position:fixed;inset:0;background:rgba(34,57,111,.28);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
+.ov.on{display:flex}
+.modal{width:100%;max-width:460px;max-height:90vh;overflow:auto;padding:18px;border-radius:28px;position:relative;animation:pop .25s ease}
+.modal::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.75;background:radial-gradient(120% 70% at 0% 0%,rgba(70,100,170,.3),transparent 65%),radial-gradient(120% 70% at 100% 100%,rgba(212,170,80,.42),transparent 65%)}
+.modal>*{position:relative}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}}
+.modal h3{margin:0;font-weight:800}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:14px 0;padding:4px;border-radius:14px;background:rgba(255,255,255,.35);border:1px solid var(--gbd)}
+.tabs button{border:0;background:transparent;box-shadow:none}
+.tabs button.on{background:var(--navy);color:var(--on);font-weight:600}
+.row{display:flex;gap:6px;margin-bottom:8px}
+input[type=text]{font:inherit;color:var(--text);background:rgba(255,255,255,.55);border:1px solid var(--gbd);border-radius:12px;padding:8px 12px;min-width:0;flex:1}
+input[type=text]:focus{outline:0;border-color:#22396F}
+.modal li.gc{padding:12px 14px;border-radius:18px;margin-bottom:10px;background:linear-gradient(145deg,rgba(69,99,173,.2),rgba(69,99,173,.05));border:1px solid var(--gbd);border-bottom:3px solid #22396F;box-shadow:0 10px 20px rgba(34,57,111,.1)}
+.modal li:not(.gc){padding:10px 14px;border-radius:16px;margin-bottom:8px;background:rgba(255,255,255,.4);border:1px solid var(--gbd)}
+.ck{width:24px;height:24px;padding:0;flex:none;border-radius:50%;background:rgba(255,255,255,.9);border:2px solid #fff;box-shadow:0 0 0 1px rgba(34,57,111,.3);color:transparent;font-size:.75rem;line-height:1;display:grid;place-items:center}
+.gc.done .ck{background:var(--navy);color:#fff;box-shadow:0 0 0 1px #22396F}
+.gc .tx{flex:1;min-width:0}
+.gc .ln{display:block;height:5px;border-radius:5px;margin-top:6px;background:linear-gradient(90deg,#22396F,transparent);opacity:.45}
+.gc.done .t{text-decoration:line-through;opacity:.55}
+.gc .x{border:0;background:transparent;box-shadow:none;opacity:.55;padding:0 6px}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:20;padding:8px 18px;border-radius:99px;background:var(--navy);color:var(--on);font-size:.85rem;opacity:0;pointer-events:none;transition:.3s}
+.toast.on{opacity:1}
+.av svg{width:28px;height:28px;stroke:var(--on);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.av.sm svg{width:20px;height:20px}
+.av.g{background:var(--gold)}.av.g svg{stroke:#3a2a00}
+.gate{max-width:380px;margin:clamp(40px,12vh,110px) auto 0;padding:22px;border-radius:26px;animation:up .4s both}
+.gate.glass{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.gate h3{margin:0 0 4px;font-weight:800}
+.gate input{width:100%;margin:8px 0;font:inherit;color:var(--text);background:rgba(255,255,255,.55);border:1px solid var(--gbd);border-radius:12px;padding:10px 12px}
+.gate input:focus{outline:0;border-color:#22396F}
+.gate .row{margin-top:6px}.gate .cfb{flex:1;width:auto}
+.ml{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+.mb{display:flex;align-items:center;gap:12px;padding:8px 12px;width:100%;text-align:start}
+.mb.on{border-color:#22396F;box-shadow:0 0 0 2px #22396F}
+.brand{display:grid;justify-items:center;gap:2px;margin-top:6px}
+.namebar{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;margin-top:4px;width:100%}
+.plate{display:grid;place-items:center;width:64px;height:42px;flex:none;border-radius:12px;background:radial-gradient(120% 90% at 20% 0%,#2c4a94 0%,#16295c 46%,#0a1535 100%);border:1px solid rgba(248,225,160,.6);box-shadow:0 4px 12px rgba(1,7,54,.3),inset 0 1px 0 rgba(255,255,255,.2)}
+.brand img{display:block;width:46px;height:auto}
+.brand .namebar .logo{margin:0}
+.brand .logo{margin:8px 0 0}
+#h0{margin-top:clamp(36px,9vh,90px)}
+.drop{border:1.5px dashed var(--muted);border-radius:18px;padding:18px 12px;text-align:center;cursor:pointer;color:var(--muted);transition:.2s;margin:2px 0 8px;background:rgba(255,255,255,.3)}
+.drop.dg,.drop:hover{border-color:#22396F;color:var(--text);background:rgba(255,255,255,.6)}
+.drop b{display:block;font-size:1.6rem;font-weight:400}.drop small{display:block;color:var(--text)}
+select{font:inherit;color:var(--text);background:rgba(255,255,255,.55);border:1px solid var(--gbd);border-radius:12px;padding:8px 12px;min-width:0}
+.upw input[type=text],.upw select{width:100%;margin-bottom:8px}
+.upw label{display:block;font-size:.8rem;color:var(--muted)}
+.fl li{border-bottom:1px solid var(--line)}.fl li:last-child{border:0}
+.sec{margin:16px 0 4px;font-size:.95rem}
+.gate input[type=password]{direction:rtl;text-align:right}
+.gate input::placeholder{text-align:right}
+
+.pick{font-size:1.1rem;font-weight:800;text-align:center;margin:0}
+.contact{display:flex;align-items:center;justify-content:center;gap:8px;width:fit-content;max-width:100%;margin:22px auto 0;padding:5px 6px 5px 14px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid var(--gbd);font-size:.8rem;color:var(--muted)}
+.contact a{color:var(--text);font-weight:700;text-decoration:none;font-size:.82rem;overflow-wrap:anywhere}
+.cp{width:30px;height:30px;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;flex:none}
+.cp svg{display:block;width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.stats.two{grid-template-columns:repeat(2,1fr)}
+.tabs.t3{grid-template-columns:repeat(3,1fr)}
+.tabs.t3 button{padding:8px 6px;font-size:.85rem}
+.cloud{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:20px;margin:0 0 14px;background:linear-gradient(145deg,rgba(248,225,160,.6),rgba(255,255,255,.35));border:1px solid var(--gbd);box-shadow:0 8px 20px rgba(184,146,58,.18)}
+.cloud .ci{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--navy);flex:none}
+.cloud .ci svg{width:24px;height:24px;stroke:var(--on);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cloud .tx{flex:1;min-width:0;font-size:.8rem;color:var(--muted);line-height:1.6}
+.cloud .tx b{display:block;color:var(--text);font-size:.95rem}
+.cloud .go{font-weight:700;text-decoration:none;padding:8px 14px}
+.cloud .note{white-space:nowrap}
+@media (max-width:400px){.cloud{flex-wrap:wrap}.cloud .tx{flex-basis:calc(100% - 60px)}.cloud .go,.cloud .note{width:100%;text-align:center}}
+.dbar{display:flex;align-items:center;gap:8px;margin:2px 0 8px}
+.dpb{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 14px;font-weight:600}
+.dpb svg,.ci2 svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.dpb.on{background:var(--navy);color:var(--on);border-color:transparent}
+.dpx{width:38px;height:38px;padding:0;border-radius:50%;flex:none}
+.upw .row{margin-bottom:8px}.upw .row input[type=text]{margin-bottom:0}
+.upw .ic{flex:none}
+.upw .steps{font-size:.8rem;color:var(--muted);margin:2px 0 8px}
+details.sm{margin:0 0 8px;font-size:.82rem;color:var(--muted)}
+details.sm summary{cursor:pointer;padding:4px 0}
+.how{margin:10px 0 0;padding:0 18px 0 0;font-size:.82rem;color:var(--muted);line-height:1.9}
+#pgrid .day.sel{background:var(--navy);color:var(--on);border-color:transparent}
+#pgrid .day.today:not(.sel){background:var(--gold);color:#3a2a00;border-color:transparent}
+.day.has::after{content:"";position:absolute;bottom:4px;width:5px;height:5px;border-radius:50%;background:#3d5aa3}
+#pgrid .day.sel.has::after{background:var(--on)}
+#pov{z-index:10}
+#pws label{display:block;font-size:.82rem;color:var(--muted);margin:0 2px 4px}#pws .row{margin-bottom:10px}#pws input{flex:1;min-width:0}
+.uc .nm{min-width:4.6em;text-align:center}
+body::before,.orb{will-change:transform;transform:translateZ(0)}
+.fl li.ge{align-items:center;gap:6px}
+.gname{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:0;text-align:start;background:none;border:0;box-shadow:none;padding:6px 4px}
+.gname b{font-size:.95rem}.gname small{font-size:.72rem;color:var(--muted);font-weight:400}
+.fl li.ge.on .gname b{color:var(--navy)}
+.fl li.gedit{gap:8px;padding-top:0}.fl li.gedit input{flex:1;min-width:0}.fl li.gedit .go{flex:none}
+#gnu{flex:1;min-width:0}
+.wrap{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));padding-bottom:max(40px,env(safe-area-inset-bottom))}
+.cloud.adm{margin-bottom:8px}
+.cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:0 0 14px}
+.lk.cb,.cb{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:11px 8px;border-radius:14px;font-weight:700;text-decoration:none;text-align:center;background:var(--navy);color:var(--on);border:0}
+.cb.off{background:rgba(255,255,255,.55);color:var(--muted);border:1px dashed var(--gbd)}
+.cb small{font-size:.7rem;font-weight:400}
+#cfs label{display:block;font-size:.82rem;color:var(--muted);margin:0 2px 4px}
+#cfs .row{margin-bottom:10px}#cfs input{flex:1;min-width:0}
+.upw .steps:empty{display:none}.upw .fnl{color:var(--navy);font-weight:600}
+#ap3 .row .cfb,.upw .row .cfb{flex:1;width:auto;min-width:0;text-align:center}
+.how{list-style-type:persian}.how li{display:list-item;padding:2px 0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="orb o1"></div><div class="orb o2"></div>
+<div class="wrap">
+<div class="brand"><div class="namebar"><span class="plate"><img src="data:image/webp;base64,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" alt="NO.1 Content Studio" width="120" height="58" decoding="async"></span><h1 class="logo">تقویم تیم نووان</h1></div><p class="sub" id="today"></p></div>
+
+<section id="home">
+  <div id="h0" class="users">
+    <h2 class="pick">نقش خودت را انتخاب کن</h2>
+    <button class="uc glass" id="goA"><div class="av"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><div class="nm">ادمین</div></button>
+    <button class="uc glass" id="goU"><div class="av"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.6a3.5 3.5 0 0 1 0 6.8"/><path d="M18 14.3c2.2.6 3.5 2.5 3.5 5.7"/></svg></div><div class="nm">کاربر</div></button>
+    <button class="uc glass" id="goG"><div class="av g"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><circle cx="12" cy="10" r="2.6"/><path d="M7.8 17.5c.6-2.2 2.2-3.2 4.2-3.2s3.6 1 4.2 3.2"/></svg></div><div class="nm">مهمان</div></button>
+  </div>
+  <div id="ha" class="gate glass hide">
+    <h3>ورود ادمین</h3><p class="note">رمز ادمین را وارد کن.</p>
+    <input type="password" id="apw" dir="rtl" placeholder="رمز ادمین" autocomplete="off">
+    <div class="row"><button class="go cfb" id="apb">ورود</button><button class="bk" data-b="h0">بازگشت</button></div>
+  </div>
+  <div id="h1" class="gate glass hide">
+    <h3>ورود کاربران</h3><p class="note">رمز عمومی تیم را وارد کن.</p>
+    <input type="password" id="gp" dir="rtl" placeholder="رمز عمومی" autocomplete="off">
+    <div class="row"><button class="go cfb" id="gpb">ورود</button><button class="bk" data-b="h0">بازگشت</button></div>
+  </div>
+  <div id="h2" class="gate glass hide">
+    <h3>تو کی هستی؟</h3><p class="note">اسمت را انتخاب کن و رمز شخصی‌ات را بنویس.</p>
+    <div class="ml" id="ml"></div>
+    <input type="password" id="up" dir="rtl" placeholder="رمز شخصی" autocomplete="off">
+    <div class="row"><button class="go cfb" id="upb">ورود به تقویم</button><button class="bk" data-b="h1">بازگشت</button></div>
+  </div>
+  <div id="h3" class="gate glass hide">
+    <h3>ورود مهمان</h3>
+    <input type="text" id="gn" placeholder="نام کاربری">
+    <div class="row"><button class="go cfb" id="gnb">ورود مهمان</button><button class="bk" data-b="h0">بازگشت</button></div>
+  </div>
+</section>
+
+<section id="guest" class="hide">
+  <div class="bar"><div class="who"><div class="av sm g"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg></div><span id="gname"></span></div><button id="gback">خروج</button></div>
+  <div class="panel glass">
+    <div class="cloudslot"></div>
+    <div class="tabs"><button class="on" id="gt1">دریافت فایل</button><button id="gt2">ارسال فایل</button></div>
+    <div id="gp1"><input type="text" id="gq" placeholder="جستجو در فایل‌ها…" style="width:100%;margin-bottom:8px"><ul class="fl" id="gin"></ul></div>
+    <div id="gp2" class="hide"><div id="gup"></div><h4 class="sec">ارسال‌های من</h4><ul class="fl" id="gout"></ul></div>
+  </div>
+</section>
+
+<section id="admin" class="hide">
+  <div class="bar"><div class="who"><div class="av sm"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><span>ادمین</span></div><button id="aback">خروج</button></div>
+  <div class="panel glass">
+    <div class="stats two"><div class="st"><b id="ac1">۰</b>از کاربران</div><div class="st"><b id="ac2">۰</b>از مهمان‌ها</div></div>
+    <div class="cloudslot"></div>
+    <div class="tabs t3"><button class="on" id="at1">دریافتی‌ها</button><button id="at2">ارسال و مدیریت</button><button id="at3">تنظیمات</button></div>
+    <div id="ap1"><ul class="fl" id="ain"></ul></div>
+    <div id="ap2" class="hide"><div id="aup"></div><h4 class="sec">ارسال‌شده‌ها</h4><ul class="fl" id="aout"></ul></div>
+    <div id="ap3" class="hide">
+      <h4 class="sec" style="margin-top:0">مهمان‌ها</h4>
+      <p class="note" style="margin-top:0">برای هر مشتری یک نام کاربری بساز تا بتواند با همان به‌عنوان مهمان وارد شود. روی اسم هر مهمان بزن تا پوشه‌ی اختصاصی‌اش را هم تعریف کنی؛ اگر نگذاری، پوشه‌ی عمومی «مهمان‌ها» را می‌بیند.</p>
+      <div class="row" style="margin-bottom:8px"><input type="text" id="gnu" dir="ltr" placeholder="نام کاربری مهمان (مثلاً ali_client)" autocapitalize="off" autocomplete="off"><button class="go" id="gna" style="flex:none">افزودن</button></div>
+      <ul class="fl" id="gl"></ul>
+      <h4 class="sec">پوشه‌های فضای ابری</h4>
+      <p class="note" style="margin-top:0">لینک پوشه‌ی گوگل‌درایو هر نفر را اینجا بگذار یا عوض کن. هر کاربر فقط پوشه‌ی خودش را می‌بیند و مهمان‌ها پوشه‌ی مهمان را.</p>
+      <div id="cfs"></div>
+      <button class="go cfb" id="cus" style="margin-top:4px">ذخیره‌ی لینک‌ها</button>
+      <ol class="how"><li>در گوگل‌درایو برای هر نفر یک پوشه بساز.</li><li>اشتراک هر پوشه را روی «هر کسی که لینک دارد — ویرایشگر» بگذار تا بتواند آپلود و دانلود کند.</li><li>لینک هر پوشه را جلوی اسمش بچسبان و ذخیره کن.</li></ol>
+      <h4 class="sec">تغییر رمز</h4>
+      <p class="note" style="margin-top:0">رمز جدید را جلوی اسم هر نفر بنویس و «ثبت» را بزن؛ از همان لحظه رمز قبلی کار نمی‌کند. رمزها خوانا ذخیره نمی‌شوند، پس رمز جدید را جایی یادداشت کن.</p>
+      <div id="pws"></div>
+    </div>
+  </div>
+</section>
+
+<section id="cal" class="hide">
+  <div class="bar"><div class="who"><div class="av sm" id="uav"></div><span id="uname"></span></div><button id="back">بازگشت</button></div>
+  <div class="panel glass">
+    <div class="stats"><div class="st"><b id="s1">۰</b>تسک‌های این ماه</div><div class="st"><b id="s2">۰</b>انجام‌شده</div><div class="st"><b id="s3">۰</b>انجام‌نشده</div></div>
+    <div class="nav">
+      <button class="ic" id="pv" aria-label="ماه قبل"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      <h2 id="mt"></h2>
+      <button class="ic" id="nx" aria-label="ماه بعد"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="lg"><span><i class="s od"></i>انجام‌نشده (گذشته)</span><span><i class="s up"></i>انجام‌نشده (پیش‌رو)</span><span><i class="s dn"></i>انجام‌شده</span><span><i class="s sh"></i>روز فیلم‌برداری</span></div>
+    <div class="ag">
+      <div class="ah"><div><b id="ad"></b><span class="badge hide" id="ab">امروز</span><span class="badge gold hide" id="sb">روز فیلم‌برداری</span><p class="hn" id="hn"></p></div><button class="add" id="open">+ افزودن</button></div>
+      <ul id="al"></ul>
+    </div>
+  </div>
+  <div class="panel glass">
+    <div class="ah"><b>روز فیلم‌برداری هفته</b></div>
+    <div class="wkn"><button class="ic" id="wp" aria-label="هفته قبل"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button><span id="wl"></span><button class="ic" id="wnx" aria-label="هفته بعد"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button></div>
+    <div class="wd7" id="wd"></div>
+    <p class="note" id="vh"></p>
+    <div class="cfrow"><button id="cfb" class="cfb"></button></div>
+    <div id="mr"></div>
+    <div class="res" id="rs"></div>
+  </div>
+  <div class="panel glass">
+    <div class="ah"><b>فایل‌های من</b></div>
+    <div class="cloudslot"></div>
+    <div class="tabs"><button class="on" id="ft1">آپلودهای من</button><button id="ft2">برای من</button></div>
+    <div id="fp1"><p class="note" style="margin-top:0">فایل برای روز <b id="udl"></b> ثبت می‌شود و به ادمین می‌رسد.</p><div class="dbar" id="dbo"></div><div id="fup"></div><ul class="fl" id="fout"></ul></div>
+    <div id="fp2" class="hide"><div class="dbar" id="dbi"></div><ul class="fl" id="fin"></ul></div>
+  </div>
+</section>
+<div class="contact"><span>ارتباط با تیم</span><a href="mailto:No1team.admin@gmail.com" target="_blank" rel="noopener noreferrer" dir="ltr">No1team.admin@gmail.com</a><button type="button" class="cp" id="cpm" aria-label="کپی ایمیل"><svg viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg></button></div>
+</div>
+
+<div class="ov" id="ov"><div class="modal glass">
+  <div class="nav" style="margin:0 0 12px"><h3 id="dt"></h3><button class="ic" id="close" aria-label="بستن">✕</button></div>
+  <div class="row"><input type="text" id="tin" placeholder="تسک جدید…"><button class="go" id="add" style="padding:8px 16px">+</button></div>
+  <ul id="tl"></ul>
+</div></div>
+<div class="ov" id="pov"><div class="modal glass">
+  <div class="nav" style="margin:0 0 12px"><h3 id="ptt">انتخاب تاریخ</h3><button class="ic" id="pcl" aria-label="بستن">✕</button></div>
+  <div class="nav"><button class="ic" id="ppv" aria-label="ماه قبل"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button><h2 id="pmt"></h2><button class="ic" id="pnx" aria-label="ماه بعد"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button></div>
+  <div class="grid" id="pgrid"></div>
+  <div class="row" style="margin-top:14px"><button class="cfb" id="ptd">امروز</button><button class="cfb" id="pclr">همه تاریخ‌ها</button></div>
+</div></div>
+<div class="toast" id="tt"></div>
+
+<script>
+(function(){const l=document.createElement('link');l.rel='stylesheet';l.href='https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;800&display=swap';document.head.appendChild(l)})();
+const U=['سپهر','شهراد','پرنیان'];
+const ROLE={'سپهر':'فیلم‌بردار','شهراد':'ادیتور','پرنیان':'سناریونویس'};
+const M=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+const W=['ش','ی','د','س','چ','پ','ج'];
+const WN=['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
+const S={'1-1':'عید نوروز','1-2':'عید نوروز','1-3':'عید نوروز','1-4':'عید نوروز','1-12':'روز جمهوری اسلامی','1-13':'روز طبیعت','3-14':'رحلت امام خمینی','3-15':'قیام ۱۵ خرداد','11-22':'پیروزی انقلاب اسلامی','12-29':'ملی شدن صنعت نفت'};
+const L={'3-6':'عید قربان','3-14':'عید غدیر خم و رحلت امام خمینی','4-3':'تاسوعای حسینی','4-4':'عاشورای حسینی','5-13':'اربعین حسینی','5-21':'رحلت پیامبر و شهادت امام حسن (ع)','5-22':'شهادت امام رضا (ع)','5-30':'شهادت امام حسن عسکری (ع)','8-22':'شهادت حضرت زهرا (س)','10-16':'مبعث پیامبر اکرم (ص)','11-4':'ولادت امام زمان (عج)','12-9':'شهادت امام علی (ع)'};
+const hname=(y,m,d)=>S[m+'-'+d]||(y===1405&&L[m+'-'+d])||'';
+const DAY=864e5;
+const F=new Intl.DateTimeFormat('en-u-ca-persian-nu-latn',{timeZone:'UTC',year:'numeric',month:'numeric',day:'numeric'});
+const $=id=>document.getElementById(id);
+const fa=n=>Number(n).toLocaleString('fa-IR',{useGrouping:false});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const jc=new Map();
+function jp(d){const t=+d;let r=jc.get(t);if(r)return r;const p={};F.formatToParts(d).forEach(x=>p[x.type]=x.value);r={y:+p.year,m:+p.month,d:+p.day};if(jc.size>800)jc.clear();jc.set(t,r);return r}
+const first=d=>new Date(d-(jp(d).d-1)*DAY);
+function nextM(f){let d=new Date(+f+27*DAY);while(jp(d).d!==1)d=new Date(+d+DAY);return d}
+const prevM=f=>first(new Date(+f-DAY));
+const iso=dt=>dt.toISOString().slice(0,10),wkStart=dt=>new Date(+dt-((dt.getUTCDay()+1)%7)*DAY);
+const lab=s=>{const d=new Date(s+'T12:00:00Z'),p=jp(d);return WN[(d.getUTCDay()+1)%7]+' '+fa(p.d)+' '+M[p.m-1]};
+const now=new Date(Date.now()-new Date().getTimezoneOffset()*6e4),tp=jp(now);
+const tpn=tp.y*10000+tp.m*100+tp.d;
+let cur=first(now),user='',key='',sel=tp.d,wk=wkStart(now),rq=0,tt=0,upDay=null;
+$('today').textContent='امروز '+fa(tp.d)+' '+M[tp.m-1]+' '+fa(tp.y);
+function toast(m){const e=$('tt');e.textContent=m;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),3500)}
+
+/* ---------- storage: shared db when available, otherwise this device ---------- */
+let db=null,mem={},FL={},AS=null;
+const clone=o=>JSON.parse(JSON.stringify(o));
+const uid=()=>U.indexOf(user);
+const dk=(p,d)=>`u${uid()}_${p.y}-${p.m}-${d}`;
+const load=k=>mem[k]||{tasks:[]};
+function save(k,v){
+  mem[k]=v;
+  dbP.then(()=>{
+    if(db){try{db.doc('kv/'+k).set(clone(v)).catch(()=>toast('ذخیره نشد؛ شاید فقط دسترسی مشاهده داری'))}catch(e){toast('ذخیره نشد')}}
+    else{try{localStorage.setItem('nv:'+k,JSON.stringify(v))}catch(e){}}
+  });
+}
+function later(){cancelAnimationFrame(rq);rq=requestAnimationFrame(()=>{if(document.querySelector('input.ed'))return;if(user)R();else fdraw()})}
+const ready=()=>Promise.race([Promise.all([dbP,kvP]),new Promise(r=>setTimeout(r,700))]);
+let kvOk;const kvP=new Promise(r=>kvOk=r);
+const dbP=(async()=>{
+  try{if(typeof claude!=='undefined'){db=await claude.use('db');}}catch(e){}
+  if(db){
+    db.collection('kv').onSnapshot(s=>{kvOk();let ch=false;s.docs.forEach(d=>{const v=clone(d.data()||{});if(JSON.stringify(mem[d.id])!==JSON.stringify(v)){mem[d.id]=v;ch=true}});if(ch)later()},()=>{kvOk()});
+    db.collection('files').onSnapshot(s=>{FL={};s.docs.forEach(d=>FL[d.id]=clone(d.data()||{}));fdraw()},()=>{});
+  }else{
+    try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k.startsWith('nv:'))mem[k.slice(3)]=JSON.parse(localStorage.getItem(k))}}catch(e){}
+    FL=mem.files||{};
+  }
+  if(!db)kvOk();
+})();
+
+/* ---------- screens ---------- */
+const SC=['home','cal','guest','admin'];
+function scr(n){SC.forEach(s=>$(s).classList.toggle('hide',s!==n));document.body.classList.toggle('in',n!=='home');if(n==='home')show('h0')}
+function enter(name){user=name;$('uav').textContent=name[0];$('uname').innerHTML=name+' <small class="role">('+ROLE[name]+')</small>';cur=first(now);sel=tp.d;scr('cal');R()}
+$('back').onclick=()=>{user='';scr('home')};
+function go(f){upDay=null;cur=f;const p=jp(cur);sel=(p.y===tp.y&&p.m===tp.m)?tp.d:1;wk=wkStart(new Date(+cur+(sel-1)*DAY));R()}
+$('pv').onclick=()=>go(prevM(cur));$('nx').onclick=()=>go(nextM(cur));
+function R(){draw();agenda();weekly();fdraw();if($('ov').classList.contains('on'))lists()}
+
+/* ---------- shooting day votes (one doc per person) ---------- */
+const vk=(ws,i)=>'v_'+ws+'_'+i;
+const vote=(ws,i)=>mem[vk(ws,i)]||{p:[null,null,null],c:false};
+function best(ws){
+  const sc={},tb={},all=U.map((u,i)=>vote(ws,i));
+  all.forEach((o,ix)=>{if(!o.c)return;o.p.forEach((x,pi)=>{if(!x)return;const pts=3-pi;sc[x]=(sc[x]||0)+pts*(1.2-.1*ix);(tb[x]=tb[x]||[0,0,0])[ix]=pts})});
+  const k=Object.keys(sc).sort((a,b)=>Math.round(sc[b]*100)-Math.round(sc[a]*100)||tb[b][0]-tb[a][0]||tb[b][1]-tb[a][1]||tb[b][2]-tb[a][2]);
+  return{all,iso:k[0]||null};
+}
+const isShoot=dt=>best(iso(wkStart(dt))).iso===iso(dt);
+function weekly(){
+  const ws=iso(wk),b=best(ws),me=b.all[uid()],lock=me.c;
+  const a=jp(wk),z=jp(new Date(+wk+6*DAY));
+  $('wl').textContent=`${fa(a.d)} ${M[a.m-1]} تا ${fa(z.d)} ${M[z.m-1]}`;
+  $('wd').innerHTML=W.map((w,i)=>{const dt=new Date(+wk+i*DAY),s=iso(dt),k=me.p.indexOf(s);
+    return `<button class="wc${k>=0?' mine':''}${b.iso===s?' win':''}${i==6?' fri':''}${lock?' lock':''}" data-s="${s}"><small>${w}</small><b>${fa(jp(dt).d)}</b>${k>=0?`<i class="pr">${fa(k+1)}</i>`:''}</button>`}).join('');
+  const cb=$('cfb');cb.textContent=lock?'✓ نظر تایید شد (ویرایش)':'تایید نظر';cb.className='cfb'+(lock?'':' go');cb.disabled=!lock&&!me.p.some(Boolean);
+  $('vh').textContent=lock?`نظر ${user} ثبت شد و می‌ماند. برای تغییر، ویرایش را بزن.`:`نظر ${user}: سه روز را به ترتیب اولویت لمس کن (۱ مهم‌ترین)، بعد «تایید نظر» را بزن.`;
+  $('mr').innerHTML=U.map((u,i)=>{const o=b.all[i],t=o.c?o.p.map((x,j)=>x?`${fa(j+1)}) ${lab(x)}`:'').filter(Boolean).join(' ، '):'هنوز تایید نکرده';return `<div class="mr"><b>${u}</b><span>${t}</span></div>`}).join('');
+  const n=b.all.filter(o=>o.c).length;
+  $('rs').innerHTML=b.iso?`روز فیلم‌برداری: <b>${lab(b.iso)}</b> <small>(بر اساس نظر ${fa(n)} نفر از ${fa(U.length)} نفر)</small>`:'بعد از تایید نظرها، روز فیلم‌برداری اینجا و روی تقویم مشخص می‌شود.';
+}
+$('wd').onclick=e=>{const b=e.target.closest('.wc');if(!b)return;const k=vk(iso(wk),uid()),o=vote(iso(wk),uid());if(o.c)return;
+  const p=[...o.p],s=b.dataset.s,i=p.indexOf(s);
+  if(i>=0)p[i]=null;else{const f=p.indexOf(null);if(f<0)return;p[f]=s}
+  save(k,{p,c:false});R()};
+$('cfb').onclick=()=>{const k=vk(iso(wk),uid()),o=vote(iso(wk),uid());if(!o.c&&!o.p.some(Boolean))return;save(k,{p:o.p,c:!o.c});R()};
+$('wp').onclick=()=>{wk=new Date(+wk-7*DAY);R()};$('wnx').onclick=()=>{wk=new Date(+wk+7*DAY);R()};
+
+/* ---------- calendar ---------- */
+function draw(){
+  const p=jp(cur),len=Math.round((nextM(cur)-cur)/DAY),off=(cur.getUTCDay()+1)%7,BC={};
+  $('mt').textContent=M[p.m-1]+' '+fa(p.y);
+  let h=W.map((w,i)=>`<div class="wd${i==6?' r':''}">${w}</div>`).join('')+'<div></div>'.repeat(off),T=0,D=0;
+  for(let d=1;d<=len;d++){
+    const s=load(dk(p,d)),n=s.tasks.length,dn=s.tasks.filter(t=>t.done).length,pend=n-dn;T+=n;D+=dn;
+    const dt=new Date(+cur+(d-1)*DAY),ws=iso(wkStart(dt)),bb=BC[ws]||(BC[ws]=best(ws));
+    const past=p.y*10000+p.m*100+d<tpn,st=pend?(past?'od':'up'):'',hol=(off+d-1)%7===6||hname(p.y,p.m,d);
+    const cl=((p.y===tp.y&&p.m===tp.m&&d===tp.d)?' today':'')+(hol?' hol':'')+(d===sel?' sel':'')+(st?' '+st:'')+(bb.iso===iso(dt)?' shoot':'');
+    const dots=`<i class="${st}"></i>`.repeat(Math.min(pend,2))+(dn?'<i></i>':'');
+    h+=`<button class="day${cl}" data-d="${d}">${fa(d)}${dots?`<span class="dots">${dots}</span>`:''}</button>`;
+  }
+  $('grid').innerHTML=h;$('s1').textContent=fa(T);$('s2').textContent=fa(D);$('s3').textContent=fa(T-D);
+}
+$('grid').onclick=e=>{const b=e.target.closest('.day');if(!b)return;upDay=null;sel=+b.dataset.d;wk=wkStart(new Date(+cur+(sel-1)*DAY));R();$('open').onclick()};
+
+const lnk=f=>f.u?`<a class="lk" href="${esc(f.u)}" target="_blank" rel="noopener">باز کردن</a>`:'';
+function agenda(){
+  const p=jp(cur);key=dk(p,sel);
+  const t=p.y===tp.y&&p.m===tp.m&&sel===tp.d,past=p.y*10000+p.m*100+sel<tpn,dt=new Date(+cur+(sel-1)*DAY);
+  $('ad').textContent=`${fa(sel)} ${M[p.m-1]}`;$('ab').classList.toggle('hide',!t);$('sb').classList.toggle('hide',!isShoot(dt));$('hn').textContent=hname(p.y,p.m,sel);
+  const s=load(key);
+  const tasks=s.tasks.map((t,i)=>`<li class="${t.done?'done':''}"><span class="b ${t.done?'dn':(past?'od':'up')}"></span><input type="checkbox" data-i="${i}" ${t.done?'checked':''}><span class="t" data-e="${i}">${esc(t.t)}</span></li>`).join('');
+  $('al').innerHTML=tasks||'<p class="note">برای این روز تسکی ثبت نشده است.</p>';
+}
+function edit(el,i){const s=load(key);const inp=document.createElement('input');inp.type='text';inp.className='ed';inp.value=s.tasks[i].t;el.replaceWith(inp);inp.focus();inp.select();let end=false;const fin=ok=>{if(end)return;end=true;const v=inp.value.trim();if(ok&&v){s.tasks[i].t=v;save(key,s)}R()};inp.onkeydown=e=>{if(e.key==='Enter')fin(true);if(e.key==='Escape')fin(false)};inp.onblur=()=>fin(true)}
+$('al').onclick=e=>{const t=e.target.closest('.t[data-e]');if(t){edit(t,+t.dataset.e);return}if(e.target.type!=='checkbox')return;const s=load(key);s.tasks[+e.target.dataset.i].done=e.target.checked;save(key,s);R()};
+
+/* ---------- day modal (tasks) ---------- */
+$('open').onclick=()=>{const p=jp(cur);$('dt').textContent=`${fa(sel)} ${M[p.m-1]} ${fa(p.y)}`;lists();$('ov').classList.add('on')};
+function lists(){
+  const s=load(key);
+  $('tl').innerHTML=s.tasks.map((t,i)=>`<li class="gc ${t.done?'done':''}"><button class="ck" data-c="${i}" aria-label="انجام شد">✓</button><div class="tx"><span class="t" data-e="${i}">${esc(t.t)}</span><i class="ln"></i></div><button class="x" data-x="${i}">✕</button></li>`).join('')||'<p class="note">هنوز تسکی ثبت نشده.</p>';
+}
+function addTask(){const v=$('tin').value.trim();if(!v)return;const s=load(key);s.tasks=s.tasks||[];s.tasks.push({t:v,done:false});save(key,s);$('tin').value='';R()}
+$('add').onclick=addTask;$('tin').onkeydown=e=>{if(e.key==='Enter')addTask()};
+$('tl').onclick=e=>{const t=e.target.closest('.t[data-e]');if(t){edit(t,+t.dataset.e);return}const b=e.target.closest('button');if(!b)return;const s=load(key);
+  if(b.dataset.c!==undefined)s.tasks[+b.dataset.c].done=!s.tasks[+b.dataset.c].done;else if(b.dataset.x!==undefined)s.tasks.splice(+b.dataset.x,1);else return;save(key,s);R()};
+const cl=()=>$('ov').classList.remove('on');
+$('close').onclick=cl;$('ov').onclick=e=>{if(e.target===$('ov'))cl()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')cl()});
+
+/* ---------- files: real upload (assets) or link, routed through the admin ---------- */
+let fwd=null;
+const fid=()=>'f'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const lsF=()=>{mem.files=FL;try{localStorage.setItem('nv:files',JSON.stringify(FL))}catch(e){}};
+function fput(o){const k=fid();FL[k]=o;fdraw();
+  dbP.then(()=>{
+    if(db){try{db.doc('files/'+k).set(o).catch(()=>{delete FL[k];fdraw();toast('ثبت نشد؛ شاید دسترسی نوشتن نداری')})}catch(e){toast('ثبت نشد')}}
+    else{lsF();toast('ذخیره‌ی مشترک فعال نیست؛ فقط روی این دستگاه ثبت شد')}
+  })}
+function fdel(k){const o=FL[k];if(!o)return;delete FL[k];fdraw();
+  dbP.then(()=>{
+    if(db){try{db.doc('files/'+k).delete().catch(()=>{FL[k]=o;fdraw();toast('حذف نشد')})}catch(e){}}else lsF();
+    if(o.a&&AS&&!Object.values(FL).some(x=>x.a===o.a))AS.delete(o.a).catch(()=>{});
+  })}
+const eq=(a,b)=>(a||'').trim().toLowerCase()===(b||'').trim().toLowerCase();
+const fl=pred=>Object.keys(FL).map(k=>({k,...FL[k]})).filter(pred).sort((a,b)=>(b.ts||0)-(a.ts||0));
+const vis=id=>!$(id).classList.contains('hide');
+const lj=ts=>jp(new Date(ts-new Date(ts).getTimezoneOffset()*6e4));
+const ljk=ts=>{if(!ts)return'';const p=lj(ts);return p.y+'-'+p.m+'-'+p.d};
+const dstr=ts=>{if(!ts)return'';const p=lj(ts);return fa(p.d)+' '+M[p.m-1]};
+const dayLab=k=>{const a=k.split('-');return fa(a[2])+' '+M[a[1]-1]};
+const sz=b=>b?(b<1048576?fa(Math.max(1,Math.round(b/1024)))+' KB':fa((b/1048576).toFixed(1))+' MB'):'';
+const who=x=>x.r==='a'?'ادمین':x.r==='g'?(x.n?x.n+' (مهمان)':'همه‌ی مهمان‌ها'):x.n;
+const xb=k=>`<button data-x="${k}">✕</button>`;
+function item(o,mode,extra){
+  const h=o.a?'/_blob/'+o.a:o.u;
+  const meta=[mode==='in'?'از '+who(o.fr):mode==='out'?'به '+who(o.to):'از '+who(o.fr)+' به '+who(o.to),dstr(o.ts),sz(o.sz),o.day?'برای '+dayLab(o.day):''].filter(Boolean).join(' · ');
+  return `<li><span class="b ${o.a?'':'f'}"></span><span class="t">${esc(o.t)}${o.n?`<br><small>${esc(o.n)}</small>`:''}<br><small>${esc(meta)}</small></span>${h?`<a class="lk" href="${esc(h)}" target="_blank" rel="noopener">${o.a?'دانلود':'باز کردن'}</a>`:''}${extra||''}</li>`}
+const none=t=>`<p class="note">${t}</p>`;
+const DF={o:null,i:null};
+const upDayKey=()=>{const p=jp(cur);return upDay||`${p.y}-${p.m}-${sel}`};
+const dfilt=v=>o=>!v||ljk(o.ts)===v||o.day===v;
+const ICAL='<svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
+const ICLOUD='<svg viewBox="0 0 24 24"><path d="M12 13v8"/><path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.5 8.2"/><path d="m8 17 4-4 4 4"/></svg>';
+const ICLIP='<svg viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>';
+function dbar(){['o','i'].forEach(k=>{const v=DF[k],e=$('db'+k);
+  const h=`<button class="dpb${v?' on':''}" data-k="${k}">${ICAL}<span>${v?dayLab(v):'انتخاب تاریخ'}</span></button>`+(v?`<button class="dpx" data-clr="${k}" aria-label="نمایش همه">✕</button>`:'');
+  if(e.dataset.h!==h){e.innerHTML=h;e.dataset.h=h}})}
+const CK=[['سپهر','sepehr'],['شهراد','shahrad'],['پرنیان','parnian'],['مهمان‌ها','g']];
+const cloudOf=k=>{const u=(mem.settings&&mem.settings.clouds&&mem.settings.clouds[k])||'';return /^https?:\/\//i.test(u)?u:''};
+const setH=(e,h)=>{if(e._h!==h){e._h=h;e.innerHTML=h}};
+const guestList=()=>((mem.settings&&mem.settings.guests)||[]).filter(Boolean);
+const glinks=()=>(mem.settings&&mem.settings.glinks)||[];
+const gLink=n=>{const x=glinks().find(x=>eq(x.u,n));return x&&/^https?:\/\//i.test(x.l||'')?x.l:''};
+let gep=-1;
+function gdraw(){
+  const gs=guestList(),sig=JSON.stringify([gs,glinks(),gep]);
+  if(gdraw.s===sig)return;gdraw.s=sig;
+  const se=$('a_to'),v=se.value;
+  $('a_gg').innerHTML=gs.map(g=>`<option value="g:${esc(g)}">${esc(g)}</option>`).join('');
+  if([...se.options].some(o=>o.value===v))se.value=v;
+  $('gl').innerHTML=gs.map((g,i)=>{const l=gLink(g);
+    return `<li class="ge${gep===i?' on':''}"><button class="gname" data-ge="${i}"><b dir="ltr">${esc(g)}</b><small>${l?'پوشه‌ی اختصاصی ثبت شده':'برای تعریف پوشه لمس کن'}</small></button>${l?`<a class="lk ic" href="${esc(l)}" target="_blank" rel="noopener noreferrer" aria-label="باز کردن پوشه">↗</a>`:''}<button data-gd="${i}">✕</button></li>`
+    +(gep===i?`<li class="gedit"><input type="text" id="gel" dir="ltr" placeholder="https://drive.google.com/drive/folders/…" value="${esc(l)}"><button class="go" data-gs="${i}">ذخیره</button></li>`:'')}).join('')||none('هنوز مهمانی تعریف نشده است.');
+}
+function cdraw(){
+  let h;
+  if(vis('admin')){
+    h=`<div class="cloud adm"><div class="ci">${ICLOUD}</div><div class="tx"><b>فضای ابری نووان</b>پوشه‌ی هر نفر را از اینجا باز کن.</div></div><div class="cgrid">`+CK.map(c=>{const u=cloudOf(c[1]);return u?`<a class="lk cb" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${c[0]}</a>`:`<button class="cb off" data-cfg="1">${c[0]}<small>لینک تنظیم نشده</small></button>`}).join('')+'</div>';
+  }else{
+    const k=(CK.find(c=>c[0]===user)||[])[1],u=vis('guest')?(gLink(guest)||cloudOf('g')):(k?cloudOf(k):'');
+    h=`<div class="cloud"><div class="ci">${ICLOUD}</div><div class="tx"><b>فضای ابری نووان</b>می‌توانید فایل‌های خود را در فضای ابری نووان آپلود یا دانلود کنید.</div>${u?`<a class="lk go" href="${esc(u)}" target="_blank" rel="noopener noreferrer">باز کردن</a>`:'<span class="note">لینک هنوز تنظیم نشده</span>'}</div>`;
+  }
+  document.querySelectorAll('.cloudslot').forEach(e=>{if(e.dataset.h!==h){e.innerHTML=h;e.dataset.h=h}});
+  CK.forEach((c,i)=>{const inp=$('cu'+i);if(!inp)return;const u=cloudOf(c[1]);if(document.activeElement!==inp)inp.value=u;const t=$('ct'+i);t.href=u||'#';t.classList.toggle('hide',!u)});
+}
+function fdraw(){
+  if(user&&vis('cal')){
+    const out=fl(o=>o.fr.r==='u'&&o.fr.n===user).filter(dfilt(DF.o)),inn=fl(o=>o.to.r==='u'&&o.to.n===user).filter(dfilt(DF.i));
+    $('ft1').textContent=`آپلودهای من (${fa(out.length)})`;$('ft2').textContent=`برای من (${fa(inn.length)})`;$('udl').textContent=dayLab(upDayKey());
+    setH($('fout'),out.map(o=>item(o,'out',xb(o.k))).join('')||none(DF.o?'در این تاریخ فایلی نیست.':'هنوز فایلی آپلود نکرده‌ای.'));
+    setH($('fin'),inn.map(o=>item(o,'in')).join('')||none(DF.i?'در این تاریخ فایلی برایت نیامده.':'هنوز فایلی برایت فرستاده نشده است.'));
+    dbar();
+  }
+  if(vis('guest')){
+    const q=($('gq').value||'').trim().toLowerCase(),
+      inn=fl(o=>o.to.r==='g'&&(!o.to.n||eq(o.to.n,guest))&&(!q||((o.t||'')+' '+(o.n||'')).toLowerCase().includes(q))),
+      out=fl(o=>o.fr.r==='g'&&eq(o.fr.n,guest));
+    $('gt1').textContent=`دریافت فایل (${fa(inn.length)})`;$('gt2').textContent=`ارسال فایل (${fa(out.length)})`;
+    setH($('gin'),inn.map(o=>item(o,'in')).join('')||none('فایلی برای دریافت نیست.'));
+    setH($('gout'),out.map(o=>item(o,'out',xb(o.k))).join('')||none('هنوز چیزی نفرستاده‌ای.'));
+  }
+  if(vis('admin')){
+    gdraw();
+    const inn=fl(o=>o.to.r==='a'),out=fl(o=>o.fr.r==='a');
+    $('ac1').textContent=fa(inn.filter(o=>o.fr.r==='u').length);$('ac2').textContent=fa(inn.filter(o=>o.fr.r==='g').length);
+    setH($('ain'),inn.map(o=>item(o,'in',`<button class="lk" data-f="${o.k}">ارسال به…</button>`+xb(o.k))).join('')||none('هنوز فایلی از کاربران یا مهمان‌ها نرسیده است.'));
+    setH($('aout'),out.map(o=>item(o,'out',xb(o.k))).join('')||none('هنوز فایلی ارسال نکرده‌ای.'));
+  }
+  cdraw();
+}
+function upHTML(p,admin){return `<div class="upw">
+  <input type="text" id="${p}t" placeholder="عنوان فایل">
+  ${admin?`<label>ارسال به</label><select id="${p}to">${U.map(u=>`<option value="u:${u}">${u} (${ROLE[u]})</option>`).join('')}<option value="g:*">همه‌ی مهمان‌ها</option><optgroup id="${p}gg" label="یک مهمان مشخص"></optgroup></select>`:''}
+  <p class="steps">۱) فایل را در فضای ابری آپلود کن  ·  ۲) لینک اشتراکش را اینجا بچسبان</p>
+  <p class="steps fnl" id="${p}fn"></p>
+  <div class="row"><input type="text" id="${p}u" dir="ltr" placeholder="لینک فایل در فضای ابری (https://…)"><button type="button" class="ic" id="${p}pb" aria-label="چسباندن لینک">${ICLIP}</button></div>
+  <input type="text" id="${p}n" placeholder="توضیح (اختیاری)">
+  <button class="go cfb" id="${p}b">ارسال</button></div>`}
+function bindUp(p,mk){
+  const q=s=>$(p+s);
+  const label=()=>{q('fn').textContent=(fwd&&p==='a_')?'ارسال مجدد: '+fwd.t:''};
+  q('pb').onclick=async()=>{try{const t=(await navigator.clipboard.readText()).trim();if(/^https?:\/\//i.test(t))q('u').value=t;else toast('در کلیپ‌بورد لینکی نیست')}catch(e){toast('اجازه‌ی چسباندن نیست؛ لینک را دستی بچسبان')}};
+  q('b').onclick=()=>{
+    const meta=mk();if(!meta)return;
+    const u=q('u').value.trim(),n=q('n').value.trim(),useF=p==='a_'&&fwd;
+    if(!/^https?:\/\//i.test(u)&&!(useF&&!u)){toast('لینک فایل را از فضای ابری بچسبان');return}
+    const t=q('t').value.trim()||(useF?fwd.t:'');
+    if(!t){toast('عنوان فایل لازم است');return}
+    const o={t,n,fr:meta.fr,to:meta.to,ts:Date.now()};if(meta.day)o.day=meta.day;
+    if(u)o.u=u;else{if(fwd.a)o.a=fwd.a;if(fwd.u)o.u=fwd.u;if(fwd.ct)o.ct=fwd.ct;if(fwd.sz)o.sz=fwd.sz}
+    fput(o);fwd=null;q('t').value=q('u').value=q('n').value='';label();toast('ارسال شد ✓')
+  };
+}
+const tg=(ids,n)=>ids.forEach((p,i)=>{$(p[0]).classList.toggle('on',i===n);$(p[1]).classList.toggle('hide',i!==n)});
+const TF=[['ft1','fp1'],['ft2','fp2']],TG=[['gt1','gp1'],['gt2','gp2']],TA=[['at1','ap1'],['at2','ap2'],['at3','ap3']];
+[TF,TG,TA].forEach(T=>T.forEach((p,i)=>$(p[0]).onclick=()=>tg(T,i)));
+$('fup').innerHTML=upHTML('u_',false);
+bindUp('u_',()=>{const p=jp(cur);return{fr:{r:'u',n:user},to:{r:'a',n:''},day:upDayKey()}});
+$('gup').innerHTML=upHTML('g_',false);
+bindUp('g_',()=>({fr:{r:'g',n:guest},to:{r:'a',n:''}}));
+$('aup').innerHTML=upHTML('a_',true);
+bindUp('a_',()=>{const v=$('a_to').value;
+  if(v==='g:*')return{fr:{r:'a',n:''},to:{r:'g',n:''}};
+  if(v.startsWith('g:'))return{fr:{r:'a',n:''},to:{r:'g',n:v.slice(2)}};
+  return{fr:{r:'a',n:''},to:{r:'u',n:v.slice(2)}}});
+const delH=e=>{const b=e.target.closest('button');if(b&&b.dataset.x)fdel(b.dataset.x)};
+$('fout').onclick=$('gout').onclick=$('aout').onclick=delH;
+$('ain').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.x){fdel(b.dataset.x);return}
+  const o=FL[b.dataset.f];if(!o)return;fwd=o;$('a_t').value=o.t;$('a_u').value='';$('a_fn').textContent='ارسال مجدد: '+o.t;tg(TA,1)};
+$('gq').oninput=fdraw;
+
+/* ---------- login gate (front door only; real protection = sharing settings) ---------- */
+const GH='f97079ed6aefb831cd13abe96de60b243be12cc1ef1f9966522c8fa7173c82d9';
+const UH=['71ac58a46d4769b9c35167a4b59fdc206f520b8060eb137c7ff017cb3f3a5ef3','87835c60a84352491e7d2ff49dcbba92c19224498e8adf31a1ae7517093ef2de','f12d4515f1ff22f89906be7b99fc4f1f6843d309edc059b1c358795f7f7d7c61'];
+async function sha(s){try{const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s.trim().toLowerCase()));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}catch(e){return''}}
+const PK=['sepehr','shahrad','parnian'],PW_EPOCH=1;
+async function pwOk(key,v){const pw=mem.settings&&mem.settings.pw,st=pw&&pw.e===PW_EPOCH&&pw[key];
+  if(st)return(await sha('nv:'+key+':'+v))===st;
+  return(await sha(v))===(key==='admin'||key==='team'?GH:UH[PK.indexOf(key)])}
+let pick=-1,guest='';
+const H=['h0','ha','h1','h2','h3'];
+const show=id=>H.forEach(h=>$(h).classList.toggle('hide',h!==id));
+document.querySelectorAll('.bk').forEach(b=>b.onclick=()=>show(b.dataset.b));
+$('goA').onclick=()=>{$('apw').value='';show('ha');$('apw').focus()};
+$('goU').onclick=()=>{$('gp').value='';show('h1');$('gp').focus()};
+$('goG').onclick=()=>{show('h3');$('gn').focus()};
+$('apb').onclick=async()=>{$('apb').disabled=true;await ready();const ok=await pwOk('admin',$('apw').value);$('apb').disabled=false;
+  if(!ok){toast('رمز ادمین درست نیست');return}
+  $('apw').value='';tg(TA,0);scr('admin');fdraw()};
+$('apw').onkeydown=e=>{if(e.key==='Enter')$('apb').onclick()};
+$('gpb').onclick=async()=>{$('gpb').disabled=true;await ready();const ok=await pwOk('team',$('gp').value);$('gpb').disabled=false;
+  if(ok){pick=-1;drawMl();$('up').value='';show('h2')}else toast('رمز عمومی درست نیست')};
+$('gp').onkeydown=e=>{if(e.key==='Enter')$('gpb').onclick()};
+function drawMl(){$('ml').innerHTML=U.map((u,i)=>`<button class="mb${i===pick?' on':''}" data-i="${i}"><span class="av sm">${u[0]}</span><span>${u} <small class="role">(${ROLE[u]})</small></span></button>`).join('')}
+$('ml').onclick=e=>{const b=e.target.closest('.mb');if(!b)return;pick=+b.dataset.i;drawMl();$('up').focus()};
+$('upb').onclick=async()=>{if(pick<0){toast('اول اسمت را انتخاب کن');return}
+  $('upb').disabled=true;await ready();const ok=await pwOk(PK[pick],$('up').value);$('upb').disabled=false;
+  if(!ok){toast('رمز شخصی درست نیست');return}
+  $('up').value=$('gp').value='';tg(TF,0);enter(U[pick])};
+$('up').onkeydown=e=>{if(e.key==='Enter')$('upb').onclick()};
+$('gnb').onclick=async()=>{const n=$('gn').value.trim();if(!n){toast('نام کاربری را بنویس');return}
+  $('gnb').disabled=true;await ready();
+  $('gnb').disabled=false;
+  const g=guestList().find(x=>eq(x,n));
+  if(!g){toast('این نام کاربری تعریف نشده؛ از ادمین بخواه برایت بسازد');return}
+  guest=g;$('gname').textContent=g;tg(TG,0);scr('guest');fdraw()};
+$('gn').onkeydown=e=>{if(e.key==='Enter')$('gnb').onclick()};
+$('gback').onclick=()=>{guest='';$('gn').value='';scr('home')};
+$('aback').onclick=()=>scr('home');
+
+/* ---------- Jalali date picker ---------- */
+let pk=null;
+function monthOf(y,m){let c=first(now),k=(y-tp.y)*12+(m-tp.m);for(;k>0;k--)c=nextM(c);for(;k<0;k++)c=prevM(c);return c}
+function pkDraw(){
+  const p=jp(pk.cur),len=Math.round((nextM(pk.cur)-pk.cur)/DAY),off=(pk.cur.getUTCDay()+1)%7;
+  $('pmt').textContent=M[p.m-1]+' '+fa(p.y);
+  let h=W.map((w,i)=>`<div class="wd${i==6?' r':''}">${w}</div>`).join('')+'<div></div>'.repeat(off);
+  for(let d=1;d<=len;d++){const k=p.y+'-'+p.m+'-'+d;
+    const cl=(k===pk.sel?' sel':'')+((p.y===tp.y&&p.m===tp.m&&d===tp.d)?' today':'')+(((off+d-1)%7===6||hname(p.y,p.m,d))?' hol':'')+(pk.marks&&pk.marks.has(k)?' has':'');
+    h+=`<button class="day${cl}" data-k="${k}">${fa(d)}</button>`}
+  $('pgrid').innerHTML=h;
+}
+function openPick(o){
+  pk=Object.assign({},o);let c=first(now);
+  if(o.sel){const a=o.sel.split('-').map(Number);c=monthOf(a[0],a[1])}
+  pk.cur=c;$('ptt').textContent=o.title||'انتخاب تاریخ';$('pclr').classList.toggle('hide',!o.clr);pkDraw();$('pov').classList.add('on')}
+const closePick=()=>{$('pov').classList.remove('on');pk=null};
+$('pgrid').onclick=e=>{const b=e.target.closest('.day');if(!b||!pk)return;const cb=pk.cb,k=b.dataset.k;closePick();cb(k)};
+$('ppv').onclick=()=>{if(pk){pk.cur=prevM(pk.cur);pkDraw()}};$('pnx').onclick=()=>{if(pk){pk.cur=nextM(pk.cur);pkDraw()}};
+$('ptd').onclick=()=>{if(!pk)return;const cb=pk.cb;closePick();cb(`${tp.y}-${tp.m}-${tp.d}`)};
+$('pclr').onclick=()=>{if(!pk)return;const cb=pk.cb;closePick();cb(null)};
+$('pcl').onclick=closePick;$('pov').onclick=e=>{if(e.target===$('pov'))closePick()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&pk)closePick()});
+
+/* ---------- user file filters by date ---------- */
+const dbh=e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.clr){DF[b.dataset.clr]=null;fdraw();return}
+  const k=b.dataset.k;if(!k)return;
+  const list=k==='o'?fl(o=>o.fr.r==='u'&&o.fr.n===user):fl(o=>o.to.r==='u'&&o.to.n===user);
+  openPick({title:'انتخاب تاریخ',sel:DF[k],clr:true,marks:new Set(list.flatMap(o=>[ljk(o.ts),o.day]).filter(Boolean)),cb:v=>{DF[k]=v;fdraw()}})};
+$('dbo').onclick=$('dbi').onclick=dbh;
+
+/* ---------- cloud folders (admin) ---------- */
+$('cfs').innerHTML=CK.map((c,i)=>`<label>${c[0]}</label><div class="row"><input type="text" id="cu${i}" dir="ltr" placeholder="https://drive.google.com/drive/folders/…"><a class="lk ic hide" id="ct${i}" href="#" target="_blank" rel="noopener noreferrer" aria-label="امتحان لینک">↗</a></div>`).join('');
+$('cus').onclick=()=>{const o={};
+  for(let i=0;i<CK.length;i++){const v=$('cu'+i).value.trim();if(v&&!/^https:\/\//i.test(v)){toast('لینک «'+CK[i][0]+'» باید با https شروع شود');return}if(v)o[CK[i][1]]=v}
+  save('settings',Object.assign({},mem.settings||{},{clouds:o}));cdraw();toast('لینک‌ها ذخیره شد ✓')};
+document.addEventListener('click',e=>{if(e.target.closest('[data-cfg]'))tg(TA,2)});
+$('cpm').onclick=async()=>{try{await navigator.clipboard.writeText('No1team.admin@gmail.com');toast('ایمیل کپی شد ✓')}catch(e){toast('No1team.admin@gmail.com')}};
+/* ---------- guests (admin) ---------- */
+$('gna').onclick=()=>{const v=$('gnu').value.trim();
+  if(!/^\S{2,30}$/.test(v)){toast('نام کاربری باید بدون فاصله و حداقل ۲ حرف باشد');return}
+  const gs=guestList();if(gs.some(g=>eq(g,v))){toast('این نام کاربری قبلاً ثبت شده');return}
+  save('settings',Object.assign({},mem.settings||{},{guests:gs.concat(v)}));$('gnu').value='';gdraw();toast('مهمان اضافه شد ✓')};
+$('gnu').onkeydown=e=>{if(e.key==='Enter')$('gna').onclick()};
+let gdp=-1,gdt=0;
+$('gl').onclick=e=>{
+  const ed=e.target.closest('[data-ge]');
+  if(ed){const i=+ed.dataset.ge;gep=gep===i?-1:i;gdraw();if(gep>=0){const el=$('gel');if(el)el.focus()}return}
+  const sv=e.target.closest('[data-gs]');
+  if(sv){const i=+sv.dataset.gs,gs=guestList(),v=$('gel').value.trim();
+    if(v&&!/^https:\/\//i.test(v)){toast('لینک باید با https شروع شود');return}
+    const arr=glinks().filter(x=>!eq(x.u,gs[i]));if(v)arr.push({u:gs[i],l:v});
+    save('settings',Object.assign({},mem.settings||{},{glinks:arr}));gep=-1;gdraw();toast(v?'پوشه‌ی مهمان ذخیره شد ✓':'لینک حذف شد');return}
+  const b=e.target.closest('button[data-gd]');if(!b)return;const i=+b.dataset.gd;
+  if(gdp!==i){gdp=i;b.textContent='حذف؟';clearTimeout(gdt);gdt=setTimeout(()=>{gdp=-1;b.textContent='✕'},3000);return}
+  const gs=guestList(),g=gs[i];gs.splice(i,1);gdp=-1;gep=-1;
+  save('settings',Object.assign({},mem.settings||{},{guests:gs,glinks:glinks().filter(x=>!eq(x.u,g))}));gdraw();toast('مهمان حذف شد')};
+/* ---------- change passwords (admin) ---------- */
+const PWK=[['admin','رمز ادمین'],['team','رمز عمومی تیم'],['sepehr','سپهر'],['shahrad','شهراد'],['parnian','پرنیان']];
+$('pws').innerHTML=PWK.map(([k,n])=>`<label>${n}</label><div class="row"><input type="text" id="pw_${k}" dir="ltr" placeholder="رمز جدید" autocomplete="off" autocapitalize="off"><button class="go" data-pw="${k}" style="flex:none">ثبت</button></div>`).join('');
+$('pws').onclick=async e=>{const b=e.target.closest('[data-pw]');if(!b)return;
+  const k=b.dataset.pw,inp=$('pw_'+k),v=inp.value.trim();
+  if(v.length<4){toast('رمز باید حداقل ۴ حرف باشد');return}
+  const h=await sha('nv:'+k+':'+v),old=mem.settings&&mem.settings.pw,cur=old&&old.e===PW_EPOCH?old:{e:PW_EPOCH};
+  save('settings',Object.assign({},mem.settings||{},{pw:Object.assign({},cur,{[k]:h})}));
+  inp.value='';toast('رمز «'+PWK.find(x=>x[0]===k)[1]+'» تغییر کرد ✓')};
+fdraw();
+</script>
+</body>
+</html>
